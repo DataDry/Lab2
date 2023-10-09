@@ -95,14 +95,19 @@ int maxMinSearch(int mass[], bool needMin) { // Поиск минимально�
     }
 }
 
-int BinarySearch(int arr[], int key, int l, int r)
+int BinarySearch(int arr[], int x, int low, int high)
 {
-    int m = l + (r - l) / 2;
-
-    if (l >= r) return -1;
-    if (arr[m] == key) return m;
-
-    return arr[m] > key ? BinarySearch(arr, key, l, m) : BinarySearch(arr, key, m + 1, r);
+    int mid;
+    if (low > high)
+        return -1;
+    else
+        mid = (low + high) / 2;
+    if (x == arr[mid])
+        return mid;
+    else if (x > arr[mid])        // x is on the right side
+        return BinarySearch(arr, x, mid + 1, high);
+    else                               // x is on the left side
+        return BinarySearch(arr, x, low, mid - 1);
 }
 void task1(){
 	//
