@@ -12,7 +12,7 @@ std::chrono::steady_clock::time_point clockStop;
 //
 // Реализация quick sort
 //
-int partition(int arr[], short int start, short int end) // Дополнительная функция для quick sort (опопрный эл-т)
+int Partition(int arr[], short int start, short int end) // Дополнительная функция для quick sort (опопрный эл-т)
 {
 
     short int pivot = arr[start];
@@ -48,7 +48,7 @@ int partition(int arr[], short int start, short int end) // Дополнител
     return pivotIndex;
 }
 
-void quickSort(int arr[], short int start, int end) // Реализация quick sort
+void Quick_Sort(int arr[], short int start, int end) // Реализация quick sort
 {
 
     // Дефолтный случай
@@ -56,16 +56,16 @@ void quickSort(int arr[], short int start, int end) // Реализация quic
         return;
 
     // Разделение массива
-    short int p = partition(arr, start, end);
+    short int p = Partition(arr, start, end);
 
     // Сортировка левой части
-    quickSort(arr, start, p - 1);
+    Quick_Sort(arr, start, p - 1);
 
     // Сортировка правой части
-    quickSort(arr, p + 1, end);
+    Quick_Sort(arr, p + 1, end);
 }
 
-int maxMinSearch(int mass[], bool needMin) { // Поиск минимального и максимального для пункта 4
+int Max_Min_Search(int mass[], bool needMin) { // Поиск минимального и максимального для пункта 4
     short int max = mass[0];
     short int min = mass[0];
     if (needMin) {
@@ -88,7 +88,7 @@ int maxMinSearch(int mass[], bool needMin) { // Поиск минимально�
     }
 }
 unsigned short int a = -1;
-int BinarySearch(int arr[], short int x, short int low, int high)
+int Binary_Search(int arr[], short int x, short int low, int high)
 {
     short int mid;
     if (low > high)
@@ -98,11 +98,11 @@ int BinarySearch(int arr[], short int x, short int low, int high)
     if (x == arr[mid])
         return mid;
     else if (x > arr[mid])        // x справа
-        return BinarySearch(arr, x, mid + 1, high);
+        return Binary_Search(arr, x, mid + 1, high);
     else                               // x слева
-        return BinarySearch(arr, x, low, mid - 1);
+        return Binary_Search(arr, x, low, mid - 1);
 }
-void insertionSort(int arr[], short int n)
+void Insertion_Sort(int arr[], short int n)
 {
     short int i, key, j;
     for (i = 1; i < n; i++) {
@@ -117,7 +117,7 @@ void insertionSort(int arr[], short int n)
         arr[j + 1] = key;
     }
 }
-void task1(){
+void Task1(){
 	//
 	// Пункт 1. Создаём целочисленный массив размерности N. Элементы массива должны принимать случайное значение в диапазоне от -99 до 99.
 	//
@@ -131,39 +131,39 @@ void task1(){
 	}
 }
 
-void task2() {
+void Task2() {
 	//
 	// Пункт 2. Отсортируем заданный в пункте 1 массив (от меньшего к большему). Определить время, затраченное на сортировку, используя библиотеку chrono.
 	//
 	clockStart = chrono::high_resolution_clock::now();
-    quickSort(mainArray, 0, N-1);
+    Quick_Sort(mainArray, 0, N-1);
 	clockStop = chrono::high_resolution_clock::now();
 	cout << "Elapsed microseconds (Quick sort): " << (chrono::duration_cast<chrono::microseconds>(clockStop - clockStart).count()) << "us\n\n\nPHW:\n";
 
     clockStart = chrono::high_resolution_clock::now();
-    insertionSort(PHWArray, N);
+    Insertion_Sort(PHWArray, N);
     clockStop = chrono::high_resolution_clock::now();
     cout << "Elapsed microseconds (Insertion sort(PHW)): " << (chrono::duration_cast<chrono::microseconds>(clockStop - clockStart).count()) << "us\n";
 }
 
 int maxx, minn;
-void task3() {
+void Task3() {
     //
     // Пункт 3. Найдём максимальный и минимальный элемент массива. Подсчитаем время поиска этих элементов в отсортированном массиве и неотсортированном, используя библиотеку chrono.
     //
     clockStart = chrono::high_resolution_clock::now();
     cout << "Max: " << mainArray[N-1] << " || Min: " << mainArray[0] << "\n";
     clockStop = chrono::high_resolution_clock::now();
-    cout << "Elapsed microseconds (for task 3, sorted array): " << (chrono::duration_cast<chrono::microseconds>(clockStop - clockStart).count()) << "us\n\n";
+    cout << "Elapsed microseconds (for Task 3, sorted array): " << (chrono::duration_cast<chrono::microseconds>(clockStop - clockStart).count()) << "us\n\n";
 
     clockStart = chrono::high_resolution_clock::now();
-    maxx = maxMinSearch(unsortedArray, false), minn = maxMinSearch(unsortedArray, true);
+    maxx = Max_Min_Search(unsortedArray, false), minn = Max_Min_Search(unsortedArray, true);
     cout << "Max: " << maxx << " || Min: " << minn << "\n";
     clockStop = chrono::high_resolution_clock::now();
-    cout << "Elapsed microseconds (for task 3, unsorted array): " << (chrono::duration_cast<chrono::microseconds>(clockStop - clockStart).count()) << "us\n";
+    cout << "Elapsed microseconds (for Task 3, unsorted array): " << (chrono::duration_cast<chrono::microseconds>(clockStop - clockStart).count()) << "us\n";
 }
 
-void task4() {
+void Task4() {
     //
     // Пункт 4. Выведем среднее значение (если необходимо, число округлим) максимального и минимального значения в отсортированном и неотсортированном. Выведем индексы всех элементов, которые равны этому значению, и их количество
     //
@@ -178,10 +178,10 @@ void task4() {
         }
     } cout << "\nAmount: " << k << "\n";
     clockStop = chrono::high_resolution_clock::now();
-    cout << "Elapsed microseconds (for task 4, sorted array): " << (chrono::duration_cast<chrono::microseconds>(clockStop - clockStart).count()) << "us\n\n";
+    cout << "Elapsed microseconds (for Task 4, sorted array): " << (chrono::duration_cast<chrono::microseconds>(clockStop - clockStart).count()) << "us\n\n";
 
     clockStart = chrono::high_resolution_clock::now();
-    maxx = maxMinSearch(unsortedArray, false), minn = maxMinSearch(unsortedArray, true);
+    maxx = Max_Min_Search(unsortedArray, false), minn = Max_Min_Search(unsortedArray, true);
     cout << "Average of maximum and minimum values (unsorted array): " << (maxx + minn) / 2 << "\n";
     k = 0;
     for (short int i = 0; i < N; i++)
@@ -191,10 +191,10 @@ void task4() {
         }
     } cout << "\nAmount: " << k << "\n";
     clockStop = chrono::high_resolution_clock::now();
-    cout << "Elapsed microseconds (for task 4, unsorted array): " << (chrono::duration_cast<chrono::microseconds>(clockStop - clockStart).count()) << "us\n";
+    cout << "Elapsed microseconds (for Task 4, unsorted array): " << (chrono::duration_cast<chrono::microseconds>(clockStop - clockStart).count()) << "us\n";
 }
 
-void task5() {
+void Task5() {
     //
     // Пункт 5. Выводем количество элементов в отсортированном массиве, которые меньше числа a, которое инициализируется пользователем.
     //
@@ -211,7 +211,7 @@ void task5() {
     cout << "\nQuantity: " << k << "\n";
 }
 
-void task6() {
+void Task6() {
     //
     // Пункт 6. Выводем количество элементов в отсортированном массиве, которые больше числа b, которое инициализируется пользователем.
     //
@@ -226,7 +226,7 @@ void task6() {
 }
 
 short int permanentc;
-void task7() {
+void Task7() {
     //
     // Пункт 7(*). Выведем информацию о том, есть ли введенное пользователем число в отсортированном массиве. Реализуем алгоритм бинарного поиска. Сравним скорость его работы с обычным перебором.
     //
@@ -239,11 +239,11 @@ void task7() {
         mov[permanentc], eax
     }*/
     clockStart = chrono::high_resolution_clock::now();
-    c = BinarySearch(mainArray, c, 0, N-1);
+    c = Binary_Search(mainArray, c, 0, N-1);
     if (c == -1) { cout << "[BS]Specified number doesnt present in the array"; }    // BS AKA binary search, BF AKA bruteforce
     else { cout << "[BS]Specified number does present in the array. Index of that number is: " << c; }
     clockStop = chrono::high_resolution_clock::now();
-    cout << "\nElapsed microseconds (for task 7, binary search): " << (chrono::duration_cast<chrono::microseconds>(clockStop - clockStart).count()) << "us\n";
+    cout << "\nElapsed microseconds (for Task 7, binary search): " << (chrono::duration_cast<chrono::microseconds>(clockStop - clockStart).count()) << "us\n";
 
     clockStart = chrono::high_resolution_clock::now();
     short int i;
@@ -256,10 +256,10 @@ void task7() {
     if (i == N) {
         cout << "\n[BF]Specified number doesnt present in the array";}
     clockStop = chrono::high_resolution_clock::now();
-    cout << "\nElapsed microseconds (for task 7, bruteforce): " << (chrono::duration_cast<chrono::microseconds>(clockStop - clockStart).count()) << "us\n";
+    cout << "\nElapsed microseconds (for Task 7, bruteforce): " << (chrono::duration_cast<chrono::microseconds>(clockStop - clockStart).count()) << "us\n";
 }
 
-void task8(){
+void Task8(){
     //
     // Пункт 8. Поменяем местами элементы массива, индексы которых вводит пользователь. Выведем скорость обмена, используя библиотеку chrono.
     //
@@ -280,25 +280,25 @@ int main() {
     short int MenuPick;
     __asm {menupick:};
     cout << "\n1. Task 1\n2. Task 2\n3. Task 3\n4. Task 4\n5. Task 5\n6. Task 6\n7. Task 7\n8. Task 8\n0. Exit\n\n";
-    //cin >> MenuPick; // Чтобы не комментировать это, следует внести изменения в следующий switch, в частности, с '1' на 1
+    //cin >> MenuPick; // Чтобы раскомментировать это, следует внести изменения в следующий switch, в частности, с '1' на 1 и закомментить _getch
     MenuPick = _getch();
     switch (MenuPick) {
     case('1'):
-        system("cls"); task1(); system("cls"); cout << "Task 1 done. Going back to menu.\n"; __asm {jmp menupick};
+        system("cls"); Task1(); system("cls"); cout << "Task 1 done. Going back to menu.\n"; __asm {jmp menupick};
     case('2'):
-        system("cls"); cout << "---Task 2---\n\n"; task2(); __asm {jmp menupick};
+        system("cls"); cout << "---Task 2---\n\n"; Task2(); __asm {jmp menupick};
     case('3'):
-        system("cls"); cout << "---Task 3---\n\n"; task3(); __asm {jmp menupick};
+        system("cls"); cout << "---Task 3---\n\n"; Task3(); __asm {jmp menupick};
     case('4'):
-        system("cls"); cout << "---Task 4---\n\n"; task4(); __asm {jmp menupick};
+        system("cls"); cout << "---Task 4---\n\n"; Task4(); __asm {jmp menupick};
     case('5'):
-        system("cls"); cout << "---Task 5---\n\n"; task5(); __asm{jmp menupick};
+        system("cls"); cout << "---Task 5---\n\n"; Task5(); __asm{jmp menupick};
     case('6'):
-        system("cls"); cout << "---Task 6---\n\n"; task6(); __asm{jmp menupick};
+        system("cls"); cout << "---Task 6---\n\n"; Task6(); __asm{jmp menupick};
     case('7'):
-        system("cls"); cout << "---Task 7---\n\n"; task7(); __asm{jmp menupick};
+        system("cls"); cout << "---Task 7---\n\n"; Task7(); __asm{jmp menupick};
     case('8'):
-        system("cls"); cout << "---Task 8---\n\n"; task8(); __asm{jmp menupick};
+        system("cls"); cout << "---Task 8---\n\n"; Task8(); __asm{jmp menupick};
     case('0'):
         system("cls"); exit(0);
     default:
